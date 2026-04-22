@@ -12,7 +12,9 @@ export class NPCs {
   }
 
   static tier_templates = {
-    minor: { maxFatigue: 3, maxBalance: 1, balance: 0 }
+    minor: { maxFatigue: 3, maxBalance: 1, balance: 0 },
+    major: { maxFatigue: 5, maxBalance: 2, balance: 0 },
+    master: { maxFatigue: 10, maxBalance: 3, balance: 0 }
   }
 }
 
@@ -184,54 +186,54 @@ const ALL_NPCs = [
   },
 
   // ===== GROUPS =====
-  {
-    title: "Small Mob",
-    tier: "group",
-    description: "A small mob of minor thugs",
-    drive: "To punish those who wronged them",
-    principle: "Retribution",
-    conditions: ["Angry", "Insecure", "Troubled"],
-    fatigue: 0,
-    techniques: ["Overwhelm"]
-  },
-  {
-    title: "Military Squad",
-    tier: "group",
-    description: "A small squad of trained soldiers",
-    drive: "To accomplish their given objective",
-    principle: "Duty",
-    conditions: ["Afraid", "Guilty", "Insecure"],
-    fatigue: 0,
-    techniques: ["Focused Fire", "Protect Objective"]
-  },
-  {
-    title: "Palace Guards",
-    tier: "group",
-    description: "A medium group of trained guards",
-    drive: "To protect the palace",
-    principle: "Loyalty",
-    conditions: ["Afraid", "Angry", "Desperate", "Guilty", "Humiliated"],
-    fatigue: 0,
-    techniques: ["Coordination", "Shield Wall", "Swarm"]
-  },
-  {
-    title: "Republic City Police Squad",
-    tier: "group",
-    description: "A group of metalbenders",
-    drive: "To enforce law and order",
-    principle: "Results",
-    conditions: ["Distracted", "Guilty", "Overbearing", "Troubled", "Zealous"],
-    fatigue: 0,
-    techniques: ["Metal Bindings", "Spread Out", "Test Defenses"]
-  },
-  {
-    title: "Elite Rebels",
-    tier: "group",
-    description: "A group of elite revolutionaries",
-    drive: "To overturn authority",
-    principle: "Freedom",
-    conditions: ["Afraid", "Guilty", "Hopeless", "Insecure", "Overconfident"],
-    fatigue: 0,
-    techniques: ["Scatter and Regroup", "Swarm", "Surround"]
-  }
-];
+  // {
+  //   title: "Small Mob",
+  //   tier: "group",
+  //   description: "A small mob of minor thugs",
+  //   drive: "To punish those who wronged them",
+  //   principle: "Retribution",
+  //   conditions: ["Angry", "Insecure", "Troubled"],
+  //   fatigue: 0,
+  //   techniques: ["Overwhelm"]
+  // },
+  // {
+  //   title: "Military Squad",
+  //   tier: "group",
+  //   description: "A small squad of trained soldiers",
+  //   drive: "To accomplish their given objective",
+  //   principle: "Duty",
+  //   conditions: ["Afraid", "Guilty", "Insecure"],
+  //   fatigue: 0,
+  //   techniques: ["Focused Fire", "Protect Objective"]
+  // },
+  // {
+  //   title: "Palace Guards",
+  //   tier: "group",
+  //   description: "A medium group of trained guards",
+  //   drive: "To protect the palace",
+  //   principle: "Loyalty",
+  //   conditions: ["Afraid", "Angry", "Desperate", "Guilty", "Humiliated"],
+  //   fatigue: 0,
+  //   techniques: ["Coordination", "Shield Wall", "Swarm"]
+  // },
+  // {
+  //   title: "Republic City Police Squad",
+  //   tier: "group",
+  //   description: "A group of metalbenders",
+  //   drive: "To enforce law and order",
+  //   principle: "Results",
+  //   conditions: ["Distracted", "Guilty", "Overbearing", "Troubled", "Zealous"],
+  //   fatigue: 0,
+  //   techniques: ["Metal Bindings", "Spread Out", "Test Defenses"]
+  // },
+  // {
+  //   title: "Elite Rebels",
+  //   tier: "group",
+  //   description: "A group of elite revolutionaries",
+  //   drive: "To overturn authority",
+  //   principle: "Freedom",
+  //   conditions: ["Afraid", "Guilty", "Hopeless", "Insecure", "Overconfident"],
+  //   fatigue: 0,
+  //   techniques: ["Scatter and Regroup", "Swarm", "Surround"]
+  // }
+]
