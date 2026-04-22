@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap');
+
 /* =========================
    Global layout
 ========================= */
 
 html, body, .main {
   margin: 0;
+  background-color: white; /* dark game-like backdrop */
+  font-family: Roboto;
 }
 
 .main {
@@ -11,9 +15,23 @@ html, body, .main {
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  background: white; /* dark game-like backdrop */
   color: #0f172a;
-  font-family: system-ui, sans-serif;
+  background-size: 100px;
+  background-position: -20px -20px;
+}
+
+.main > * {
+  background-image: linear-gradient(90deg, #fffffff5, #ffffffb5);
+}
+
+.button {
+  border-radius: 6px;
+  background: #1e3a8a10;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  color: #263344;
+  border: 1px solid #263344;
 }
 
 /* =========================
@@ -44,12 +62,21 @@ html, body, .main {
 }
 
 /* results grid */
+
 .search-results {
-  display: flex;
-  gap: 10px;
-  max-height: 55vh;
+  max-height: 30vh;
+  width: 30vw;
   overflow-y: auto;
   padding: 10px;
+}
+
+.search-results .search-result {
+    margin-bottom: 1rem;
+}
+
+.main.search .start {
+  padding: 0.5rem;
+  width: 8rem;
 }
 
 /* =========================
@@ -96,23 +123,11 @@ html, body, .main {
 
 /* search shrinks to top strip */
 .main.battle .search {
-  height: 80px;
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  border-bottom: 1px solid #1e293b;
-}
-
-.main.battle .search-results {
   display: none;
 }
 
-.main.battle .search-line input {
-  width: 260px;
-}
-
 /* battle takes center stage */
+
 .main.battle .battle {
   flex: 1;
   display: flex;
@@ -120,6 +135,7 @@ html, body, .main {
 }
 
 /* NPCs grow in battle mode */
+
 .main.battle .npcs {
   flex: 1;
   display: flex;
@@ -131,14 +147,14 @@ html, body, .main {
 }
 
 /* actions visible in battle mode */
+
 .main.battle .actions {
-  height: 70px;
   display: flex;
+  padding: 1rem;
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  border-top: 1px solid #1e293b;
-  background: #0b1220;
+  box-shadow: 0px 0px 6px 1px #00000091;
+  backdrop-filter: blur(1px);
 }
 
 /* =========================
@@ -146,16 +162,79 @@ html, body, .main {
 ========================= */
 
 .search-result, .npc {
-  background: linear-gradient(90deg, #1e3a8a10, transparent); /* light blue tone */
+  background: linear-gradient(90deg, #1e3a8a50, #1e3a8a10); /* light blue tone */
   border-bottom: 1px solid #60a5fa;
   border-top: 1px solid #60a5fa;
   padding: 10px;
-  min-width: 260px;
+  width: 300px;
   transition: transform 0.15s ease, opacity 0.15s ease;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.search-result .title, .npc .title {
+  grid-column: 1 / 4;
+}
+
+.search-result .tier, .npc .tier {
+  grid-column: 4 / 5;
+  text-align: right;
+}
+
+.search-result .description, .npc .description {
+  grid-column: 1 / 5;
+  font-style: italic;
+  color: #0b2559;
+  font-weight: bold;
+  vertical-align: text-top;
+}
+
+.search-result .drive, .npc .drive {
+  grid-column: 1 / 5;
+}
+
+.search-result .status, .npc .status {
+  grid-column: 1 / 5;
+}
+
+.search-result .status, .npc .fatigue {
+  grid-column: 1 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.search-result .conditions, .npc .conditions {
+  grid-column: 1 / 5;
+}
+
+.search-result .principle, .npc .principle {
+  grid-column: 1 / 3;
+}
+
+.search-result .balance, .npc .balance {
+  grid-column: 3 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.search-result .techniques, .npc .techniques {
+  grid-column: 1 / 5;
+}
+
+.search-result .approaches, .npc .approaches {
+  grid-column: 1 / 5;
 }
 
 .search-result:hover {
   transform: translateY(-2px);
+}
+
+.input[type="range"] {
+  flex-grow: 1;
 }
 
 /* text blocks */
@@ -173,10 +252,46 @@ html, body, .main {
 .description,
 .drive,
 .principle,
+.balance,
+.fatigue,
+.conditions,
 .techniques {
   font-size: 12px;
-  margin-top: 4px;
-  opacity: 0.9;
+}
+
+.drive::before {
+  content: 'DRIVE: ';
+  font-weight: bold;
+}
+
+.principle::before {
+  content: 'PRINCIPLE: ';
+  font-weight: bold;
+}
+
+.conditions::before {
+  content: 'CONDITIONS: ';
+  font-weight: bold;
+}
+
+.conditions .condition {
+  display: inline;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.conditions .condition.selected {
+  text-decoration: line-through;
+}
+
+.fatigue::before {
+  content: 'FATIGUE: ';
+  font-weight: bold;
+}
+
+.techniques::before {
+  content: 'TECHNIQUES: ';
+  font-weight: bold;
 }
 
 /* =========================
@@ -186,24 +301,19 @@ html, body, .main {
 .approaches {
   margin-top: 8px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   gap: 6px;
 }
 
 .approach {
-  font-size: 11px;
+  width: 60px;
   padding: 4px 6px;
-  border-radius: 6px;
-  border: 1px solid #334155;
-  background: #0b1220;
-  cursor: pointer;
-  user-select: none;
+  font-size: 11px;
 }
 
 .approach.selected {
-  background: #22c55e;
-  color: #0b1220;
-  border-color: #22c55e;
+  background: #263344;
+  color: white
 }
 
 /* =========================
@@ -216,14 +326,10 @@ html, body, .main {
 }
 
 /* buttons */
-.actions .reset {
+.actions .next, .actions .add, .actions .end {
   padding: 6px 10px;
-  border-radius: 6px;
-  background: #334155;
-  cursor: pointer;
-  user-select: none;
   font-size: 12px;
-  margin-left: 8px;
+  align-self: flex-end;
 }
 
 /* next disabled logic via .ready */

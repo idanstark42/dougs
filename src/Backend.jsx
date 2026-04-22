@@ -2,16 +2,17 @@ const MIN_QUERY_LENGTH = 3
 
 export class NPCs {
   static async filter(query) {
+    if (query.length === 0) {
+      return ALL_NPCs
+    }
     if (query.length < MIN_QUERY_LENGTH) {
       return []
-    } else {
-      console.log(ALL_NPCs)
-      return ALL_NPCs.filter(npc => npc.title.toLowerCase().includes(query.toLowerCase()))
     }
+    return ALL_NPCs.filter(npc => npc.title.toLowerCase().includes(query.toLowerCase()))
   }
 
   static tier_templates = {
-    minor: { maxFatigue: 3, balance: 0 }
+    minor: { maxFatigue: 3, maxBalance: 1, balance: 0 }
   }
 }
 
