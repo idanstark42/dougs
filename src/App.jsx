@@ -44,6 +44,14 @@ function App() {
     conditions: Object.fromEntries(template.conditions.map(condition => [condition, false]))
   })
 
+  const addNPC = npc => {
+    setBattle(prev => ({ ...prev, npcs: [...prev.npcs, generateNPC(npc)] }))
+  }
+
+  const removeNPC = npc => {
+    setBattle(prev => ({ ...prev, npcs: prev.npcs.filter(doug => doug !== npc) }))
+  }
+
   const reset = () => {
     setBattle({ ...EMPTY_BATTLE })
   }
@@ -82,7 +90,7 @@ function App() {
         <input name="search" value={search} onChange={e => setSearch(e.target.value)} />
       </div>
       <div className='search-results'>
-        {results.map(npc => <div className='search-result' onMouseUp={() => setBattle(prev => ({ ...prev, npcs: [...prev.npcs, generateNPC(npc)] }))}>
+        {results.map(npc => <div className='search-result' onMouseUp={() => addNPC(npc)}>
           <div className='title'>{npc.title}</div>
           <div className='tier'>{ICONS[npc.tier]} {npc.tier}</div>
           <div className='description'>{npc.description}</div>
@@ -97,7 +105,11 @@ function App() {
     </div>
     <div className={`battle ${ready() ? 'ready' : ''}`}>
       <div className='npcs'>
-        {battle.npcs.map(npc => <div className='npc'>
+        {battle.npcs.map(npc => <div className='npc' onClick={() => {
+          if (mode === MODES.SEARCH) {
+            removeNPC(npc)
+          }
+        }}>
           <div className='title'>{npc.title}</div>
           <div className='tier'>{ICONS[npc.tier]} {npc.tier}</div>
           <div className='description'>{npc.description}</div>
